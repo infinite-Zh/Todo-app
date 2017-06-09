@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import com.infinite.todoapp.R;
 import com.infinite.todoapp.addTask.AddTaskActivity;
 import com.infinite.todoapp.data.Task;
+import com.infinite.todoapp.data.source.MyTaskLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,7 @@ import java.util.List;
  * Created by 19082 on 2017/6/7.
  */
 
-public class TaskListFragment extends Fragment implements TaskListContract.View{
+public class TaskListFragment extends Fragment implements TaskListContract.View,LoaderManager.LoaderCallbacks<List<Task>>{
 
     private ScrollChildSwipeRefreshLayout mLayout;
     private ListView mListView;
@@ -33,6 +37,9 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
     private TasksAdapter mAdapter;
     private List<Task> tasks=new ArrayList<>();
     private TaskListContract.Presenter mPresenter;
+
+    private LoaderManager mLoaderMamager;
+    private Loader<List<Task>> mLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +62,10 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
                 mPresenter.addNewTask();
             }
         });
+
+        mLoaderMamager=getLoaderManager();
+        mLoaderMamager.initLoader(0,null,this);
+        mLoaderMamager.restartLoader(0,null,this);
         return root;
     }
 
@@ -106,6 +117,30 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
         Intent intent=new Intent(getActivity(), AddTaskActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public Loader<List<Task>> onCreateLoader(int i, Bundle bundle) {
+        Loader<List<Task>> listLoader=new MyTaskLoader(getActivity());
+        return listLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Task>> loader, List<Task> tasks) {
+        if (tasks!=null&&tasks.size()>0){
+            for (Task task:tasks){
+                Log.e("task",task.toString());
+            }
+        }else {
+            Log.e("task","empty");
+        }
+    }
+
+
+    @Override
+    public void onLoaderReset(Loader<List<Task>> loader) {
+
+    }
+
 
     private static class TasksAdapter extends BaseAdapter {
 
@@ -200,4 +235,7 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
     public static TaskListFragment newInstance(){
         return new TaskListFragment();
     }
+
+
+
 }
