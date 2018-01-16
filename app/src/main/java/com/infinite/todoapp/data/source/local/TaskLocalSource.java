@@ -88,7 +88,9 @@ public class TaskLocalSource implements TaskDataSource {
 
     @Override
     public void clearCompleteTask() {
-
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        String sql = "delete from " + TaskDbHelper.TABLE_NAME + " where " + TaskDbHelper.COMPLETED + " = 1";
+        db.execSQL(sql);
     }
 
     @Override

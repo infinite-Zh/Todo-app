@@ -31,5 +31,7 @@ public interface TaskListContract {
         void refresh();
 
         void setFiltering(TaskFilterType taskFilterType);
+
+        void clearCompleteTasks();
     }
 }

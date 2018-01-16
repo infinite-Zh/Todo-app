@@ -220,6 +220,7 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
                 showFilterMenu();
                 break;
             case R.id.menu_clear:
+                mPresenter.clearCompleteTasks();
                 break;
             case R.id.menu_refresh:
                 mPresenter.refresh();

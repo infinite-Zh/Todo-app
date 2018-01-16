@@ -88,4 +88,10 @@ public class TaskListPresenter implements TaskListContract.Presenter {
         mFilterType = taskFilterType;
         loadTasks(true);
     }
+
+    @Override
+    public void clearCompleteTasks() {
+        mTaskDataRepository.clearCompleteTask();
+        loadTasks(true);
+    }
 }

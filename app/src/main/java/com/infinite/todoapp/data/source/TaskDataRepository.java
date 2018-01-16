@@ -98,7 +98,7 @@ public class TaskDataRepository implements TaskDataSource {
 
     @Override
     public void clearCompleteTask() {
-
+        mTasksLocalDataSource.clearCompleteTask();
     }
 
     @Override
