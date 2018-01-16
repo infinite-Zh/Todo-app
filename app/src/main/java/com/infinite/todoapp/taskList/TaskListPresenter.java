@@ -4,7 +4,10 @@ import com.infinite.todoapp.data.Task;
 import com.infinite.todoapp.data.source.TaskDataRepository;
 import com.infinite.todoapp.data.source.TaskDataSource;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.infinite.todoapp.taskList.TaskFilterType.*;
 
 /**
  * Created by 19082 on 2017/6/7.
@@ -13,10 +16,13 @@ import java.util.List;
 public class TaskListPresenter implements TaskListContract.Presenter {
     private TaskListContract.View mTaskListView;
     private TaskDataRepository mTaskDataRepository;
-    public TaskListPresenter(TaskDataRepository taskDataRepository,TaskListContract.View view){
-        mTaskDataRepository=taskDataRepository;
-        mTaskListView=view;
+    private TaskFilterType mFilterType = NONE;
+
+    public TaskListPresenter(TaskDataRepository taskDataRepository, TaskListContract.View view) {
+        mTaskDataRepository = taskDataRepository;
+        mTaskListView = view;
     }
+
     @Override
     public void start() {
 
@@ -32,7 +38,26 @@ public class TaskListPresenter implements TaskListContract.Presenter {
         mTaskDataRepository.getTasks(new TaskDataSource.LoadTasksCallback() {
             @Override
             public void onTaskLoaded(List<Task> tasks) {
-                mTaskListView.showTaskList(tasks);
+                List<Task> showList = new ArrayList<>();
+
+                for (Task task : tasks) {
+                    switch (mFilterType) {
+                        case NONE:
+                            showList.add(task);
+                            break;
+                        case TYPE_ACTIVE:
+                            if (task.isActive()) {
+                                showList.add(task);
+                            }
+                            break;
+                        case TYPE_COMPLETED:
+                            if (task.isCompleted()) {
+                                showList.add(task);
+                            }
+                            break;
+                    }
+                }
+                mTaskListView.showTaskList(showList);
             }
 
             @Override
@@ -60,6 +85,7 @@ public class TaskListPresenter implements TaskListContract.Presenter {
 
     @Override
     public void setFiltering(TaskFilterType taskFilterType) {
-
+        mFilterType = taskFilterType;
+        loadTasks(true);
     }
 }
