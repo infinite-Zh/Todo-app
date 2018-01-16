@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.infinite.todoapp.R;
 
 public class AddTaskFragment extends Fragment implements AddTaskContract.View{
 
+    public static final String ARGUMENT_EDIT_TASK_ID="edit_task_id";
     private AddTaskContract.Presenter mPresenter;
     private EditText mTitleEd,mDesEt;
     @Nullable
@@ -66,4 +70,6 @@ public class AddTaskFragment extends Fragment implements AddTaskContract.View{
     public void setDescription(String description) {
 
     }
+
+
 }

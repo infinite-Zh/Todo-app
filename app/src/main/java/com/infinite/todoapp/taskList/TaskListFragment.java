@@ -7,11 +7,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.infinite.todoapp.R;
@@ -55,6 +59,8 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
                 mPresenter.addNewTask();
             }
         });
+        setHasOptionsMenu(true);
+
         return root;
     }
 
@@ -199,5 +205,49 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
 
     public static TaskListFragment newInstance(){
         return new TaskListFragment();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.tasks_fragment_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_filter:
+                showFilterMenu();
+                break;
+            case R.id.menu_clear:
+                break;
+            case R.id.menu_refresh:
+                mPresenter.refresh();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showFilterMenu(){
+        PopupMenu popupMenu=new PopupMenu(getContext(),getActivity().findViewById(R.id.menu_filter));
+        popupMenu.inflate(R.menu.filter_tasks);
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.all:
+                        mPresenter.setFiltering(TaskFilterType.NONE);
+                        break;
+                    case R.id.active:
+                        mPresenter.setFiltering(TaskFilterType.TYPE_ACTIVE);
+                        break;
+                    case R.id.completed:
+                        mPresenter.setFiltering(TaskFilterType.TYPE_COMPLETED);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }

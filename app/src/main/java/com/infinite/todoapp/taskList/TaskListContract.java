@@ -12,16 +12,24 @@ import java.util.List;
 
 public interface TaskListContract {
 
-    interface View extends IBaseView<Presenter>{
+    interface View extends IBaseView<Presenter> {
         void showTaskList(List<Task> tasks);
+
         void showAddTask();
 
     }
 
-    interface Presenter extends IBasePresenter{
+    interface Presenter extends IBasePresenter {
         void addNewTask();
+
         void loadTasks(boolean forceUpdate);
+
         void completeTask(String taskId);
+
         void activteTask(String taskId);
+
+        void refresh();
+
+        void setFiltering(TaskFilterType taskFilterType);
     }
 }

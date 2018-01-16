@@ -52,4 +52,14 @@ public class TaskListPresenter implements TaskListContract.Presenter {
         mTaskDataRepository.activiteTask(taskId);
         loadTasks(true);
     }
+
+    @Override
+    public void refresh() {
+        loadTasks(true);
+    }
+
+    @Override
+    public void setFiltering(TaskFilterType taskFilterType) {
+
+    }
 }
