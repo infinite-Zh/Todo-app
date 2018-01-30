@@ -26,7 +26,6 @@ public class TaskListActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         TaskListFragment fragment = TaskListFragment.newInstance();
         fragment.setPresenter(new TaskListPresenter(TaskDataRepository.getInstance(TaskRemoteSource.getInstance(), TaskLocalSource.getInstance(getApplicationContext())), fragment));
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
