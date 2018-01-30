@@ -1,5 +1,6 @@
 package com.infinite.todoapp.taskList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -110,7 +111,7 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
     @Override
     public void showAddTask() {
         Intent intent=new Intent(getActivity(), AddTaskActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,ADD_TASK_CODE);
     }
 
     private static class TasksAdapter extends BaseAdapter {
@@ -250,5 +251,14 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
                 return false;
             }
         });
+    }
+
+    private static final int ADD_TASK_CODE=1000;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK&&ADD_TASK_CODE==requestCode){
+            mPresenter.refresh();
+        }
     }
 }
