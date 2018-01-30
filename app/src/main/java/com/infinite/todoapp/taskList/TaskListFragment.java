@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.infinite.todoapp.R;
 import com.infinite.todoapp.addTask.AddTaskActivity;
 import com.infinite.todoapp.data.Task;
+import com.infinite.todoapp.taskDetail.TaskDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,8 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
         mAdapter=new TasksAdapter(tasks, new TaskItemListener() {
             @Override
             public void onTaskClick(Task clickedTask) {
-
+                Intent intent=new Intent(getContext(), TaskDetailActivity.class);
+                startActivity(intent);
             }
 
             @Override
