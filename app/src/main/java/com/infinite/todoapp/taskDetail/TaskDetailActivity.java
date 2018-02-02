@@ -32,12 +32,12 @@ public class TaskDetailActivity extends AppCompatActivity {
         mToolbar.setTitle("todo-task-detail");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TaskDetailFragment fragment = TaskDetailFragment.getInstance(mTaskId);
-        fragment.setPresenter(new TaskDetailPresenter(
+        new TaskDetailPresenter(
                 mTaskId,
                 fragment,
                 TaskDataRepository.getInstance(
                         TaskRemoteSource.getInstance(),
-                        TaskLocalSource.getInstance(this))));
+                        TaskLocalSource.getInstance(this)));
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
     }
 

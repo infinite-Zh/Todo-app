@@ -16,24 +16,25 @@ import com.infinite.todoapp.R;
  * Created by 19082 on 2017/6/8.
  */
 
-public class TaskDetailFragment extends Fragment implements TaskDetailContract.View{
+public class TaskDetailFragment extends Fragment implements TaskDetailContract.View {
 
     private TaskDetailContract.Presenter mPresenter;
-    private TextView mDetailTitle,mDetailDescription;
+    private TextView mDetailTitle, mDetailDescription;
     private CheckBox mDetailCompleteStatus;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root=inflater.inflate(R.layout.taskdetail_frag,container,false);
-        mDetailTitle= (TextView) root.findViewById(R.id.task_detail_title);
-        mDetailDescription= (TextView) root.findViewById(R.id.task_detail_description);
-        mDetailCompleteStatus= (CheckBox) root.findViewById(R.id.task_detail_complete);
+        View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
+        mDetailTitle = (TextView) root.findViewById(R.id.task_detail_title);
+        mDetailDescription = (TextView) root.findViewById(R.id.task_detail_description);
+        mDetailCompleteStatus = (CheckBox) root.findViewById(R.id.task_detail_complete);
         mDetailCompleteStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
+                if (b) {
                     mPresenter.completeTask();
-                }else {
+                } else {
                     mPresenter.activiteTask();
                 }
             }
@@ -43,7 +44,11 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     }
 
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mPresenter.start();
+    }
 
     @Override
     public void showTitle(String title) {
@@ -56,19 +61,27 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     }
 
     @Override
-    public void setPresenter(TaskDetailContract.Presenter presenter) {
-        mPresenter=presenter;
+    public void showMissingTask() {
+        mDetailTitle.setText("");
+        mDetailDescription.setText(R.string.no_data);
     }
 
-    public static TaskDetailFragment getInstance(String taskId){
-        Bundle bundle=new Bundle();
-        bundle.putString("taskId",taskId);
-        TaskDetailFragment fragment=new TaskDetailFragment();
+    @Override
+    public void editTask(String taskId) {
+
+    }
+
+    @Override
+    public void setPresenter(TaskDetailContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    public static TaskDetailFragment getInstance(String taskId) {
+        Bundle bundle = new Bundle();
+        bundle.putString("taskId", taskId);
+        TaskDetailFragment fragment = new TaskDetailFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    private void initData(){
-
-    }
 }

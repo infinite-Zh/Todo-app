@@ -50,7 +50,22 @@ public class TaskLocalSource implements TaskDataSource {
 
     @Override
     public void getTask(String taskId, GetTaskCallback callback) {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        String sql = "select * from " + TaskDbHelper.TABLE_NAME + " where " + TaskDbHelper.ID + " = '" + taskId+"'";
+        Cursor cursor = db.rawQuery(sql, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(cursor.getColumnIndex(TaskDbHelper.ID));
+                String title = cursor.getString(cursor.getColumnIndex(TaskDbHelper.TITLE));
+                String description = cursor.getString(cursor.getColumnIndex(TaskDbHelper.DESCRIPTION));
+                boolean complete = cursor.getInt(cursor.getColumnIndex(TaskDbHelper.COMPLETED)) == 1;
+                Task task = new Task(title, description, id, complete);
+                callback.onTaskLoaded(task);
 
+            }
+        }
+        db.close();
+        cursor.close();
     }
 
 

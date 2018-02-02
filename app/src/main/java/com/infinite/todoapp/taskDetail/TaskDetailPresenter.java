@@ -1,7 +1,10 @@
 package com.infinite.todoapp.taskDetail;
 
+import android.text.TextUtils;
+
 import com.infinite.todoapp.data.Task;
 import com.infinite.todoapp.data.source.TaskDataRepository;
+import com.infinite.todoapp.data.source.TaskDataSource;
 
 /**
  * Created by 19082 on 2017/6/8.
@@ -23,9 +26,8 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
 
     @Override
     public void start() {
-
+        loadTask();
     }
-
 
 
     @Override
@@ -43,8 +45,27 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
         mTaskDataRepository.activiteTask(mTaskId);
     }
 
+    @Override
+    public void editTask() {
+        mView.editTask(mTaskId);
+    }
 
-    private void loadTask(){
 
+    private void loadTask() {
+        if (TextUtils.isEmpty(mTaskId)) {
+            mView.showMissingTask();
+        }
+        mTaskDataRepository.getTask(mTaskId, new TaskDataSource.GetTaskCallback() {
+            @Override
+            public void onTaskLoaded(Task task) {
+                mView.showTitle(task.getTitle());
+                mView.showDescription(task.getDescription());
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 }
