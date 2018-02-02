@@ -38,9 +38,11 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
                 }
             }
         });
+
         return root;
 
     }
+
 
 
     @Override
@@ -58,11 +60,15 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         mPresenter=presenter;
     }
 
-    public TaskDetailFragment getInstance(String taskId){
+    public static TaskDetailFragment getInstance(String taskId){
         Bundle bundle=new Bundle();
         bundle.putString("taskId",taskId);
         TaskDetailFragment fragment=new TaskDetailFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    private void initData(){
+
     }
 }
