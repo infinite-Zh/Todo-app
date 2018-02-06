@@ -18,6 +18,8 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskdetail_act);
         mToolbar= (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -34,4 +36,5 @@ public class TaskDetailActivity extends AppCompatActivity implements TaskDetailC
     public void showDescription(String description) {
 
     }
+
 }
