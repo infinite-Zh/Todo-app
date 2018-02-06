@@ -73,6 +73,7 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
             @Override
             public void onTaskClick(Task clickedTask) {
                 Intent intent=new Intent(getContext(), TaskDetailActivity.class);
+                intent.putExtra("taskId",clickedTask.getId());
                 startActivity(intent);
             }
 

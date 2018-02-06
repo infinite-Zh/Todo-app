@@ -12,11 +12,14 @@ public interface TaskDetailContract {
     interface View extends IBaseView<Presenter>{
         void showTitle(String title);
         void showDescription(String description);
+        void showMissingTask();
+        void editTask(String taskId);
     }
 
     interface Presenter extends IBasePresenter{
         void deleteTask();
         void completeTask();
         void activiteTask();
+        void editTask();
     }
 }
