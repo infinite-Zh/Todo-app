@@ -1,5 +1,6 @@
 package com.infinite.todoapp.taskDetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.infinite.todoapp.R;
+import com.infinite.todoapp.editTask.EditTaskActivity;
 
 /**
  * Created by 19082 on 2017/6/8.
@@ -68,7 +70,9 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     @Override
     public void editTask(String taskId) {
-
+        Intent intent=new Intent(getActivity(), EditTaskActivity.class);
+        intent.putExtra("taskId",taskId);
+        startActivity(intent);
     }
 
     @Override
