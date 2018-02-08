@@ -9,8 +9,19 @@ import android.view.ViewGroup
 /**
  * Created by xz on 2018/2/7.
  */
-class EditTaskFragment:Fragment(){
+class EditTaskFragment:Fragment() ,EditTaskContract.View{
+
+    private lateinit var mPresenter:EditTaskContract.Presenter
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun setPresenter(presenter: EditTaskContract.Presenter) {
+        mPresenter=presenter
+    }
+
+    override fun updateTask(title: String, description: String) {
+
     }
 }
