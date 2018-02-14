@@ -11,6 +11,7 @@ import android.view.ViewGroup
  */
 class EditTaskFragment : Fragment(), EditTaskContract.View {
 
+
     private lateinit var mPresenter: EditTaskContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,5 +24,12 @@ class EditTaskFragment : Fragment(), EditTaskContract.View {
 
     override fun updateTask(title: String, description: String) {
         mPresenter.updateTask(title, description)
+    }
+
+    override fun showTaskTitle(title: String) {
+
+    }
+
+    override fun showTaskDescription(description: String) {
     }
 }
