@@ -116,6 +116,12 @@ public class TaskDataRepository implements TaskDataSource {
 
     }
 
+    @Override
+    public void updateTask(Task task) {
+        mTasksLocalDataSource.updateTask(task);
+        mTasksRemoteDataSource.updateTask(task);
+    }
+
     private void getTaskDataFromRemoteDataSource(final LoadTasksCallback callback) {
         mTasksRemoteDataSource.getTasks(new LoadTasksCallback() {
             @Override
