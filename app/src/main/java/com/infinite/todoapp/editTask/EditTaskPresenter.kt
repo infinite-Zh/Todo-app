@@ -16,7 +16,6 @@ class EditTaskPresenter(taskDataRepository: TaskDataRepository):EditTaskContract
     }
 
     override fun updateTask(title: String, description: String) {
-        taskDataRepo.saveTask()
     }
 
     override fun loadTask(taskId:String) {

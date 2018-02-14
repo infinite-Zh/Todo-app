@@ -94,6 +94,7 @@ public class TaskLocalSource implements TaskDataSource {
         ContentValues cv = new ContentValues();
         cv.put(TaskDbHelper.COMPLETED, 0);
         db.update(TaskDbHelper.TABLE_NAME, cv, TaskDbHelper.ID + "=?", new String[]{taskId});
+        db.close();
     }
 
     @Override
@@ -106,6 +107,7 @@ public class TaskLocalSource implements TaskDataSource {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         String sql = "delete from " + TaskDbHelper.TABLE_NAME + " where " + TaskDbHelper.COMPLETED + " = 1";
         db.execSQL(sql);
+        db.close();
     }
 
     @Override
@@ -125,6 +127,10 @@ public class TaskLocalSource implements TaskDataSource {
 
     @Override
     public void updateTask(Task task) {
-
+        SQLiteDatabase db=mDbHelper.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(TaskDbHelper.TITLE,task.getTitle());
+        cv.put(TaskDbHelper.DESCRIPTION,task.getDescription());
+        db.update(TaskDbHelper.TASK_DB_NAME,cv,"where "+TaskDbHelper.ID+"=?",new String[]{task.getId()});
     }
 }
