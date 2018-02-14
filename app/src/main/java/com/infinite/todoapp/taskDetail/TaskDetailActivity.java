@@ -31,8 +31,8 @@ public class TaskDetailActivity extends AppCompatActivity {
         processIntent();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         fab= (FloatingActionButton) findViewById(R.id.fab_edit_task);
-        setSupportActionBar(mToolbar);
         mToolbar.setTitle("todo-task-detail");
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final TaskDetailFragment fragment = TaskDetailFragment.getInstance(mTaskId);
         new TaskDetailPresenter(

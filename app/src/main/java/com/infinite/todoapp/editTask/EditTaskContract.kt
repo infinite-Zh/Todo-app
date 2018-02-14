@@ -9,7 +9,8 @@ import com.infinite.todoapp.IBaseView
 class EditTaskContract{
 
      interface Presenter :IBasePresenter{
-         fun updateTask()
+         fun updateTask(title:String,description:String)
+         fun loadTask()
      }
     interface View :IBaseView<Presenter>{
         fun updateTask(title:String,description:String)
