@@ -122,4 +122,9 @@ public class TaskLocalSource implements TaskDataSource {
     public void deleteTask(String taskId) {
 
     }
+
+    @Override
+    public void updateTask(Task task) {
+
+    }
 }

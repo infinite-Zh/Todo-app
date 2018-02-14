@@ -42,4 +42,6 @@ public interface TaskDataSource {
 
     void deleteTask(String taskId);
 
+    void updateTask(Task task);
+
 }

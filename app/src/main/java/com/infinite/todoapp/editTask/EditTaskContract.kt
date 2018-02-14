@@ -10,7 +10,7 @@ class EditTaskContract{
 
      interface Presenter :IBasePresenter{
          fun updateTask(title:String,description:String)
-         fun loadTask(id:String)
+         fun loadTask(taskId:String)
      }
     interface View :IBaseView<Presenter>{
         fun updateTask(title:String,description:String)
