@@ -12,11 +12,18 @@ import com.infinite.todoapp.R
  */
 class EditTaskFragment : Fragment(), EditTaskContract.View {
 
+    companion object {
+        fun getInstance(): EditTaskFragment {
+            val fragment = EditTaskFragment()
+            return fragment
+        }
+    }
+
 
     private lateinit var mPresenter: EditTaskContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view=inflater.inflate(R.layout.fragment_edit_task,container,false)
+        val view = inflater!!.inflate(R.layout.fragment_edit_task, container, false)
         return view
     }
 
