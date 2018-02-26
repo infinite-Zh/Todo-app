@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.infinite.todoapp.R
+import kotlinx.android.synthetic.main.fragment_edit_task.*
 
 /**
  * Created by xz on 2018/2/7.
@@ -36,9 +37,10 @@ class EditTaskFragment : Fragment(), EditTaskContract.View {
     }
 
     override fun showTaskTitle(title: String) {
-
+        edit_title.setText(title)
     }
 
     override fun showTaskDescription(description: String) {
+        edit_description.setText(description)
     }
 }
