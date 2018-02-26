@@ -28,6 +28,11 @@ class EditTaskFragment : Fragment(), EditTaskContract.View {
         return view
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mPresenter.start()
+    }
+
     override fun setPresenter(presenter: EditTaskContract.Presenter) {
         mPresenter = presenter
     }

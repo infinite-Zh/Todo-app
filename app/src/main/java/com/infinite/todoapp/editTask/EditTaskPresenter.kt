@@ -14,6 +14,10 @@ class EditTaskPresenter(taskId: String, view: EditTaskContract.View, taskDataRep
     val mView = view
     val mTaskId = taskId
 
+    init {
+        mView.setPresenter(this)
+    }
+
     override fun start() {
         loadTask(mTaskId)
     }
