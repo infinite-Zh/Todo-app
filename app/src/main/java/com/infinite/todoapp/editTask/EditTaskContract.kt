@@ -16,6 +16,8 @@ class EditTaskContract{
         fun updateTask()
         fun showTaskTitle(title:String)
         fun showTaskDescription(description: String)
+        fun showProgress()
+        fun updateComplete()
 
 
     }

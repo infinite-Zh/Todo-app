@@ -23,7 +23,9 @@ class EditTaskPresenter(taskId: String, view: EditTaskContract.View, taskDataRep
     }
 
     override fun updateTask(title: String, description: String) {
+        mView.showProgress()
         taskDataRepo.updateTask(Task(title, description, mTask!!.id))
+        mView.updateComplete()
     }
 
     override fun loadTask(taskId: String) {

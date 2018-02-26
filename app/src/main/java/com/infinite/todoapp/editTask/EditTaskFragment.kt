@@ -1,6 +1,7 @@
 package com.infinite.todoapp.editTask
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,16 @@ import kotlinx.android.synthetic.main.fragment_edit_task.*
  * Created by xz on 2018/2/7.
  */
 class EditTaskFragment : Fragment(), EditTaskContract.View {
+    override fun showProgress() {
+        rl_progress.visibility=View.VISIBLE
+        edit_title.visibility=View.GONE
+        edit_description.visibility=View.GONE
+    }
+
+    override fun updateComplete() {
+        Snackbar.make(view!!, "修改成功", Snackbar.LENGTH_LONG)
+        activity.finish()
+    }
 
     companion object {
         fun getInstance(): EditTaskFragment {
