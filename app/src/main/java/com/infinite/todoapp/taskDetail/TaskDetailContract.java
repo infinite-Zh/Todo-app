@@ -21,5 +21,6 @@ public interface TaskDetailContract {
         void completeTask();
         void activiteTask();
         void editTask();
+        void updateTask();
     }
 }

@@ -50,6 +50,11 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
         mView.editTask(mTaskId);
     }
 
+    @Override
+    public void updateTask() {
+        loadTask();
+    }
+
 
     private void loadTask() {
         if (TextUtils.isEmpty(mTaskId)) {

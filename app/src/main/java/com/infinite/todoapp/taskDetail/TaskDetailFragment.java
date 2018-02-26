@@ -1,5 +1,6 @@
 package com.infinite.todoapp.taskDetail;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -72,7 +73,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     public void editTask(String taskId) {
         Intent intent=new Intent(getActivity(), EditTaskActivity.class);
         intent.putExtra("taskId",taskId);
-        startActivity(intent);
+        startActivityForResult(intent,EDIT_TASK_CODE);
     }
 
     @Override
@@ -88,4 +89,12 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         return fragment;
     }
 
+    public static final int EDIT_TASK_CODE=100;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode== Activity.RESULT_OK&&requestCode==EDIT_TASK_CODE){
+            mPresenter.updateTask();
+        }
+    }
 }
