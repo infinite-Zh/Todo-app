@@ -29,6 +29,9 @@ class EditTaskActivity : AppCompatActivity() {
                         TaskRemoteSource.getInstance(),
                         TaskLocalSource.getInstance(this@EditTaskActivity)))
         ActivityUtils.addFragmentToActivity(supportFragmentManager, fragment, R.id.contentFrame)
+        fab_done.setOnClickListener {
+            fragment.updateTask()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

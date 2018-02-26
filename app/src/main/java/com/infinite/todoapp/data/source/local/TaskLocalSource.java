@@ -131,6 +131,6 @@ public class TaskLocalSource implements TaskDataSource {
         ContentValues cv=new ContentValues();
         cv.put(TaskDbHelper.TITLE,task.getTitle());
         cv.put(TaskDbHelper.DESCRIPTION,task.getDescription());
-        db.update(TaskDbHelper.TASK_DB_NAME,cv,"where "+TaskDbHelper.ID+"=?",new String[]{task.getId()});
+        db.update(TaskDbHelper.TABLE_NAME,cv,TaskDbHelper.ID+"=?",new String[]{task.getId()});
     }
 }

@@ -37,8 +37,8 @@ class EditTaskFragment : Fragment(), EditTaskContract.View {
         mPresenter = presenter
     }
 
-    override fun updateTask(title: String, description: String) {
-        mPresenter.updateTask(title, description)
+    override fun updateTask() {
+        mPresenter.updateTask(edit_title.text.toString(), edit_description.text.toString())
     }
 
     override fun showTaskTitle(title: String) {
