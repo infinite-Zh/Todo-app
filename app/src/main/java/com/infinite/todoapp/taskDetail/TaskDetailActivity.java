@@ -24,13 +24,14 @@ import com.infinite.todoapp.util.ActivityUtils;
 public class TaskDetailActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private FloatingActionButton fab;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskdetail_act);
         processIntent();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        fab= (FloatingActionButton) findViewById(R.id.fab_edit_task);
+        fab = (FloatingActionButton) findViewById(R.id.fab_edit_task);
         mToolbar.setTitle("todo-task-detail");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,6 +63,8 @@ public class TaskDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
                 finish();
                 break;
         }

@@ -74,7 +74,7 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
             public void onTaskClick(Task clickedTask) {
                 Intent intent=new Intent(getContext(), TaskDetailActivity.class);
                 intent.putExtra("taskId",clickedTask.getId());
-                startActivity(intent);
+                startActivityForResult(intent,TASK_DETAIL_CODE);
             }
 
             @Override
@@ -257,10 +257,11 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
     }
 
     private static final int ADD_TASK_CODE=1000;
+    private static final int TASK_DETAIL_CODE=1001;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode== Activity.RESULT_OK&&ADD_TASK_CODE==requestCode){
+        if (resultCode== Activity.RESULT_OK&&ADD_TASK_CODE==requestCode||TASK_DETAIL_CODE==requestCode){
             mPresenter.refresh();
         }
     }
