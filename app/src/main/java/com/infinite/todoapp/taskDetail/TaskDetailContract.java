@@ -12,6 +12,7 @@ public interface TaskDetailContract {
     interface View extends IBaseView<Presenter>{
         void showTitle(String title);
         void showDescription(String description);
+        void showTaskState(boolean isComplete);
         void showMissingTask();
         void editTask(String taskId);
     }

@@ -64,6 +64,11 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     }
 
     @Override
+    public void showTaskState(boolean isComplete) {
+        mDetailCompleteStatus.setChecked(isComplete);
+    }
+
+    @Override
     public void showMissingTask() {
         mDetailTitle.setText("");
         mDetailDescription.setText(R.string.no_data);

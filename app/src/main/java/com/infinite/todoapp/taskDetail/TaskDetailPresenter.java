@@ -65,6 +65,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
             public void onTaskLoaded(Task task) {
                 mView.showTitle(task.getTitle());
                 mView.showDescription(task.getDescription());
+                mView.showTaskState(task.isCompleted());
             }
 
             @Override
