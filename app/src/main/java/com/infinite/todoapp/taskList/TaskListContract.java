@@ -17,6 +17,10 @@ public interface TaskListContract {
 
         void showAddTask();
 
+        void showProgress();
+
+        void refreshComplete();
+
     }
 
     interface Presenter extends IBasePresenter {

@@ -35,6 +35,7 @@ public class TaskListPresenter implements TaskListContract.Presenter {
 
     @Override
     public void loadTasks(boolean forceUpdate) {
+        mTaskListView.showProgress();
         mTaskDataRepository.getTasks(new TaskDataSource.LoadTasksCallback() {
             @Override
             public void onTaskLoaded(List<Task> tasks) {
@@ -58,10 +59,12 @@ public class TaskListPresenter implements TaskListContract.Presenter {
                     }
                 }
                 mTaskListView.showTaskList(showList);
+                mTaskListView.refreshComplete();
             }
 
             @Override
             public void onDataNotAvailable() {
+                mTaskListView.refreshComplete();
             }
         });
     }

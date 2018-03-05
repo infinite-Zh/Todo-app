@@ -117,6 +117,16 @@ public class TaskListFragment extends Fragment implements TaskListContract.View{
         startActivityForResult(intent,ADD_TASK_CODE);
     }
 
+    @Override
+    public void showProgress() {
+        mLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void refreshComplete() {
+        mLayout.setRefreshing(false);
+    }
+
     private static class TasksAdapter extends BaseAdapter {
 
         private List<Task> mTasks;
